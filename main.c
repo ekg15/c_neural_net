@@ -4,6 +4,12 @@
 
 #define PI acos(-1.0)
 
+typedef struct layernode {
+	struct layer *curr;
+	struct layernode *nextnode;
+} layernode;
+
+
 /* layers hold weights between them and previous layer*/
 typedef struct layer {
 	int size;
@@ -13,6 +19,12 @@ typedef struct layer {
 	struct layer *next;
 	struct layer *input;
 } layer;
+
+/* holds linked lists of layers, activations*/
+typedef struct model {
+	struct layernode* layers;
+	int (**activs)(int);
+} model;
 
 float* normalinit(int size, float mu, float sigma);
 float** normalweights(int prevsize, int currsize, float mu, float sigma);
